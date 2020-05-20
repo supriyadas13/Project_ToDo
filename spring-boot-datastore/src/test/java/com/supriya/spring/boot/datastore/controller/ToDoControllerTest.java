@@ -28,7 +28,7 @@ public class ToDoControllerTest {
 
     private  ObjectMapper mapper = new JsonMapper();
 
-   /* @Test
+    @Test
     public void getAllTasksTest(){
         try{
             mockMvc.perform(get("/to-do/"))
@@ -41,12 +41,12 @@ public class ToDoControllerTest {
            // .contentType(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk())
            // .andExpect(jsonPath("$.taskName").isEmpty());
             
-            mockMvc.perform(get("/to-do/")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
-            .andExpect(jsonPath("$").isNotEmpty());
+           // mockMvc.perform(get("/to-do/")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$").isArray())
+           // .andExpect(jsonPath("$").isNotEmpty());
 
         } catch (Exception e){
             fail("exception : "+e.getLocalizedMessage());
         }
     
-    }*/
+    }
 }

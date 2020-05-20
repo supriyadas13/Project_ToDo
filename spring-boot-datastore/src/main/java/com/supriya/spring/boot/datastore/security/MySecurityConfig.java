@@ -20,17 +20,17 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
             .inMemoryAuthentication()
             .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
             .and()
-            .withUser("supriya").password(passwordEncoder().encode("test123")).roles("USER")
-            .authorities("ROLE_USER");
+            .withUser("supriya").password(passwordEncoder().encode("test123")).roles("USER");
     }
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .anyRequest().authenticated()
-            .and()
-            .httpBasic();
+            .antMatchers("/admin").hasRole("ADMIN")
+            .antMatchers("/").hasRole("USER")
+           // .antMatchers("/").permitAll()
+            .and().formLogin();
  
     }
  
