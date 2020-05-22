@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepo extends JpaRepository<Task, Long> {
     
-   // List<Task> findByStatus(String emailAddress, String lastname);
+   //List<Task> findByStatus(String taskStatus);
 }
