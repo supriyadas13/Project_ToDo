@@ -2,7 +2,7 @@ resources:
   - name: repo
     type: git
     source:
-      uri: https://github.com/supriyadas13/Projects_SpringBoot.git
+      uri: https://github.com/supriyadas13/Project_ToDo.git
       branch: master
     check_every: 1m
   
