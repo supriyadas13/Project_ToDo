@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    db:
+      image: mysql
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: 'example'
+      volumes:
+        - 'mysql-data:/var/lib/mysql'
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+
+    app:
+      build: '.'
+      depends_on:
+          - 'db'
+      environment:
+        DATABASE_ENDPOINT: 'localhost'
+      ports:
+        - '8888:8080'
+  
+volumes:
+  mysql-data: {}
