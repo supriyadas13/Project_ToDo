@@ -1,4 +1,4 @@
-package com.supriya.spring.boot.datastore.model;
+package com.supriya.spring.boot.datastore.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,8 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="TaskTable", schema="ToDo")
 public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -77,6 +79,7 @@ public class Task implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+        
     }
 
     public LocalDate getTaskCreateDate() {

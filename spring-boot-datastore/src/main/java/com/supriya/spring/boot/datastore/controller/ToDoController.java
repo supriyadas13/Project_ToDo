@@ -1,9 +1,10 @@
 package com.supriya.spring.boot.datastore.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.supriya.spring.boot.datastore.entity.TaskRepo;
-import com.supriya.spring.boot.datastore.model.Task;
+import com.supriya.spring.boot.datastore.repository.TaskRepo;
+import com.supriya.spring.boot.datastore.entity.Task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -25,11 +26,10 @@ public class ToDoController {
     @Autowired
     private TaskRepo taskRepo;
 
-    
     @PostMapping("/addTask")
         public Task addTask(@RequestBody Task taskobj){
             taskRepo.save(taskobj);
-            return taskobj;  
+            return  taskobj;  
         }
 
     @PutMapping("/updateTask/{id}")
@@ -49,13 +49,14 @@ public class ToDoController {
             return taskRepo.findAll();
         }
     
-        /*
+        
+        
     @GetMapping("/getTasks/{status}")
         public List<Task> getCompletedTasks(@PathVariable String taskStatus){
-           // return taskRepo.findByStatus(taskStatus);
-           return taskRepo.findAll
+           return taskRepo.findByStatus(taskStatus);
+           //return new ArrayList<>();
         }
-*/
+
     @GetMapping("/getTasks/{id}")
         public Task getTaskbyID(@PathVariable long id){
             return taskRepo.getOne(id);

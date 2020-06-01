@@ -1,7 +1,6 @@
 package com.supriya.spring.boot.datastore.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,7 +21,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("SUPRIYA").password(passwordEncoder().encode("test123"))
+        auth.inMemoryAuthentication().withUser("SUPRIYA").password(passwordEncoder().encode("das123"))
                 .authorities("ROLE_USER");
         auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin123"))
                 .authorities("ROLE_USER", "ROLE_ADMIN");
@@ -30,13 +29,38 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated().and()
-                .httpBasic();
-        // .authenticationEntryPoint(authenticationEntryPoint);
+        http
+              .authorizeRequests().antMatchers("/**").hasRole("USER").and().httpBasic()
+              .and()
+              .csrf().disable();
 
-        // http.addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
+        //http.authorizeRequests().anyRequest().authenticated().and()
+        //   .httpBasic();
+    }
+    /*
+    @Autowired
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+        .inMemoryAuthentication()
+            .withUser("supriya").password(passwordEncoder().encode("test123")).roles("USER");
+                //.withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            //.csrf().disable()
+            .authorizeRequests().anyRequest().permitAll().anyRequest().authenticated()
+            //.antMatchers("/to-do-list/*").hasRole("ADMIN")
+            //.antMatchers("/h2console/**").permitAll()
+            //.antMatchers("/to-do-list/getTasks/*").hasRole("USER")
+            //.antMatchers("/to-do-list/*").permitAll().anyRequest().permitAll().anyRequest().authenticated()
+            .and().httpBasic()
+            ;
+ 
+    }
+    */
  
     @Bean
     public PasswordEncoder passwordEncoder() {
